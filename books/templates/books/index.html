@@ -1,0 +1,39 @@
+{% extends 'books/base.html' %}
+{% block content %}
+<a href="{% url 'books:add' %}" class="btn btn-success" style="margin-top: 10px"><i class="fas fa-plus-square"></i>
+    Add</a>
+
+<h1 class="my-3"></h1>
+
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th>#</th>
+            <th style="width: 230px;">Title</th>
+            <th style="width: 230px;">Category</th>
+            <th>Publisher</th>
+            <th style="width: 230px;">Author</th>
+            <th>Language</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="myTable">
+        {% for book in books %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{book.title }}</td>
+            <td>{{book.category.name }}</td>
+            <td>{{book.publisher.name }}</td>
+            <td>
+                {{book.authors.all|join:", " }}</td>
+            <td>{{book.language }}</td>
+            <td><a href="{% url 'books:edit' book.pk %}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
+                <a href="javascript:void(0);" onclick="Shop.delete('{% url 'books:delete' book.pk %}')"
+                    class="btn btn-danger"><i class="fas fa-eraser"></i>
+                    Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
