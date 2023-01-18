@@ -1,0 +1,65 @@
+.header-title {
+	background-color: white;
+	padding: 20px;
+	font-size: 16px;
+	margin-top: 50px;
+	margin-bottom: 15px;
+	font-weight: 600;
+}
+
+.item {
+	background-color: white;
+	padding: 20px;
+	font-size: 16px;
+	box-shadow: 0 1px 1px 0 rgb(0 0 0/ 5%);
+	border-radius: 0.125rem;
+	border: 1px solid rgba(0, 0, 0, 0.09);
+	font-weight: 600;
+}
+
+.item a {
+	text-decoration: none;
+	color: black;
+}
+
+.item a:hover {
+	color: rgba(25, 0, 255, 0.959);
+}
+
+body {
+	background: #ededed;
+}
+
+h4.tieude-tp {
+	margin-top: 45px;
+	font-size: 26px;
+	font-weight: 640;
+	color: #3c4a65;
+	margin-bottom: 20px;
+}
+
+h4.tieude-tp::after {
+	content: "";
+	height: 2px;
+	width: 300px;
+	background-color: #fa9f2c;
+	display: block;
+}
+
+.button-buy-submit-cart {
+	width: 25%;
+	float: left;
+	text-align: center;
+	border: none;
+	line-height: 40px;
+	border-radius: 2 px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #fff;
+}
+
+.no-cart {
+	padding: 30px;
+	text-align: center;
+	background: white;
+}

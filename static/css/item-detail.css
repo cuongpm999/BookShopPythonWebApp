@@ -1,0 +1,100 @@
+body {
+    background: #ededed;
+}
+
+.information {
+	margin-top: 50px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+.button {
+    display: block;
+    text-align: center;
+}
+
+.button a:hover {
+    text-decoration: none;
+}
+
+.btn1,
+.btn2 {
+    border: 1px solid #de0b00;
+    height: 50px;
+    width: 30%;
+}
+
+.btn1:hover {
+    background-color: #fff5f1 !important;
+}
+
+.btn1 i {
+    color: #de0b00;
+}
+
+.btn2 {
+    background-color: #de0b00;
+    margin-left: 10px;
+}
+
+.btn2:hover {
+    background-color: #f05d40;
+}
+
+.gia-chinh {
+    color: #666;
+    font-size: 20px;
+    font-weight: 600;
+    display: inline-block;
+    margin-right: 20px;
+    text-decoration: line-through;
+    line-height: 35px;
+}
+
+.scrollbar {
+	padding: 10px;
+	height: 380px;
+	overflow-y: auto;
+	margin-bottom: 20px;
+}
+
+#style-1::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+	border-radius: 10px;
+	background-color: #ededed;
+}
+
+#style-1::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+}
+
+.book {
+    background-color: white;
+    padding: 10px;
+    border-radius: 3px;
+    margin-top: 20px;
+}
+
+.detail-img img {
+	width: 366px;
+	margin-bottom: 10px;
+}
+
+.detail-img .list-img img {
+	width: 80px;
+	border : 1px solid #ccc;
+	cursor: pointer;
+}
+
+.table td, .table th {
+	border-top: 0;
+}
+.table td{
+	font-size: 17px; 
+	font-weight: 600; 
+	color: #495057;
+}

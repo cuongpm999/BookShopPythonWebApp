@@ -1,0 +1,42 @@
+{% extends 'manage/base.html' %}
+{% block content %}
+<a href="{% url 'add_bookitem' %}" class="btn btn-success" style="margin-top: 10px"><i class="fas fa-plus-square"></i>
+    Add</a>
+
+<h1 class="my-3"></h1>
+
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th>BarCode</th>
+            <th style="width: 160px;">Title</th>
+            <th style="width: 150px;">Category</th>
+            <th>Publisher</th>
+            <th style="width: 160px;">Author</th>
+            <th>Price</th>
+            <th>Discount</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="myTable">
+        {% for bookitem in bookitems %}
+        <tr>
+            <td>{{bookitem.barCode}}</td>
+            {% comment %} {{bookitem.img.url}} {% endcomment %}
+            <td>{{bookitem.book.title }}</td>
+            <td>{{bookitem.book.category }}</td>
+            <td>{{bookitem.book.publisher.name }}</td>
+            <td>
+                {{bookitem.book.authors.all|join:", " }}</td>
+            <td>{{bookitem.price }}</td>
+            <td>{{bookitem.discount}}</td>
+            <td><a href="{% url 'edit_bookitem' bookitem.barCode %}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
+                <a href="javascript:void(0);" onclick="Shop.delete('{% url 'delete_bookitem' bookitem.barCode %}')"
+                    class="btn btn-danger"><i class="fas fa-eraser"></i>
+                    Delete</a>
+            </td> 
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

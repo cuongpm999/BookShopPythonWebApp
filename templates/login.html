@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+<div id="main">
+    <div class="header-w3l">
+        <h1 class="mt-5">Đăng nhập</h1>
+    </div>
+    <div class="main-w3layouts-agileinfo">
+        <!--form-stars-here-->
+        <div class="wthree-form">
+            <h2>Vui lòng điền để đăng nhập</h2>
+            <a class="login-google" href="#">
+                <div class="btn-gg">
+                    <div class="btn-gg-img">
+                        <img src="{% static 'img/icons8-google-48.png' %}" alt="logo">
+                    </div>
+                    <div class="btn-gg-text">
+                        Tiếp tục với <b>Gmail</b>
+                    </div>
+                </div>
+            </a> <a class="login-facebook" href="#">
+                <div class="btn-f">
+                    <div class="btn-f-img">
+                        <img src="{% static 'img/icons8-facebook-48.png' %}" alt="logo">
+                    </div>
+                    <div class="btn-f-text">
+                        Tiếp tục với <b>Facebook</b>
+                    </div>
+                </div>
+            </a>
+            <div class="separator">Hoặc</div>
+            <form action="{% url 'login' %}" method="post">
+                {% if status %}
+                <div class="alert alert-danger" style="font-size: 13px; text-align: center;">
+                    <strong>Failed!</strong> Đăng nhập thất bại!
+                </div>
+                {% endif %}
+                {% csrf_token %}
+                <div class="form-sub-w3">
+                    <input type="text" name="username" placeholder="Tên tài khoản" required />
+                    <div class="icon-w3">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="form-sub-w3">
+                    <input type="password" name="password" placeholder="Mật khẩu" required />
+                    <div class="icon-w3">
+                        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="submit-agileits">
+                    <input type="submit" name="submit" value="Đăng nhập">
+                </div>
+            </form>
+            <h2 style="margin-top: 30px;">
+                Bạn chưa có tài khoản <br> <a href="{% url 'register' %}">Đăng kí
+                    ngay</a>
+            </h2>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

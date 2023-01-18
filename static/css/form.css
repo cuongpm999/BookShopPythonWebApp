@@ -1,0 +1,85 @@
+.lienhe h3 {
+	text-align: left;
+	color: #063753
+}
+
+.lienhe h3::after {
+	content: none
+}
+
+.lienhe h3 span {
+	background-color: red;
+	color: red;
+	border-radius: 5px;
+	margin-right: 8px
+}
+
+.lienhe .row.cards {
+	border: 1px solid rgba(0, 0, 0, .125);
+	border-radius: .25rem
+}
+
+body {
+	background: #ededed
+}
+
+.lienhe .row {
+	background-color: #fff;
+	padding: 15px
+}
+
+.lienhe .nav-item {
+	font-size: 18px;
+	font-weight: 500
+}
+
+.lienhe .row {
+	background-color: #fff;
+	padding: 15px
+}
+
+.lienhe label {
+	font-size: 20px;
+	font-weight: 600
+}
+
+.required:before {
+	content: "* ";
+	color: red
+}
+
+h4.tieude-tp {
+	margin-top: 45px;
+	font-size: 26px;
+	font-weight: 640;
+	color: #3c4a65;
+	margin-bottom: 20px
+}
+
+h4.tieude-tp::after {
+	content: "";
+	height: 2px;
+	width: 300px;
+	background-color: #fa9f2c;
+	display: block
+}
+
+@media only screen and (max-width:500px) {
+	h4.tieude-tp::after {
+		width: 270px
+	}
+	h4.tieude-tp {
+		font-size: 23px
+	}
+	.lienhe label {
+		font-size: 17px;
+		font-weight: 600
+	}
+}
+
+@media only screen and (max-width:376px) {
+	.card {
+		width: 100%;
+		margin-left: -1px
+	}
+}

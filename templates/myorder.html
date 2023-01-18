@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load filters %}
+{% load mathfilters %}
+<style>
+    #main .table {
+        border-collapse: collapse;
+        border: 1px solid #ebebeb;
+        text-align: center;
+        vertical-align: middle;
+    }
+    
+    .table thead tr {
+        background: #f8f8f8;
+    }
+    
+    .table thead th {
+        border-collapse: collapse;
+        border: 1px solid #ebebeb;
+        text-align: center;
+        vertical-align: middle;
+        border-bottom: 2px solid #ddd;
+        font-size: 15px;
+    }
+    
+    .table tbody td {
+        border-collapse: collapse;
+        border: 1px solid #ebebeb;
+        text-align: center;
+        vertical-align: middle;
+    }
+    
+    .table tbody td a:hover {
+        text-decoration: none;
+    }
+    
+    .table tfoot .btn {
+        padding: 6px 18px;
+    }
+    
+    .total-cart {
+        text-transform: uppercase;
+        text-align: right;
+        font-weight: 500;
+        font-size: 18px;
+        margin-top: 25px;
+    }
+    
+    .total-money {
+        color: red;
+    }
+    
+    .total-cart .btn {
+        margin-top: 15px;
+        padding: 8px 20px;
+    }
+    
+    .panel-primary {
+        border-color: #337ab7;
+    }
+    
+    .panel {
+        margin-bottom: 20px;
+        background-color: #fff;
+        border: 1px solid #e9ecf2;
+        border-radius: 4px;
+        -webkit-box-shadow: 0 1px 1px rgb(0 0 0/ 0.2);
+        box-shadow: 0 1px 1px rgb(0 0 0/ 0.2);
+    }
+    
+    .panel-primary>.panel-heading {
+        background-color: #1c215ee6;
+        color: #fff;
+        border: none;
+    }
+    
+    .panel-heading {
+        font-size: 18px;
+        font-weight: 300;
+        letter-spacing: 0.025em;
+        height: 60px;
+        line-height: 38px;
+        padding: 10px 15px;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+    }
+    
+    .panel-body {
+        padding: 15px;
+    }
+    
+    body {
+        background: #ededed;
+    }
+</style>
+
+<div id="main">
+    <div class="container">
+        <h1 class="mt-5"></h1>
+        {% for key, value in myorders.items %}
+            <div class="panel panel-primary" style="margin-top: 30px;">
+                <div class="panel-heading">
+                    Ngày mua:
+                    {{ key.created_at|date:"d/m/Y" }}
+                    - Tổng tiền:
+                    {{ key.payment.totalMoney|format_money }}
+                    ₫ - {{ key.shipment.name }} {{ key.shipment.price|format_money }} đ
+                </div>
+                <div class="panel-body">
+                    <div style="margin-bottom: 10px;">
+                        <span class="text-success">{{ key.status }}</span>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Ảnh sản phẩm</th>
+                                <th>Tên sản phẩm</th>
+                                <th style="width: 150px;">Giá</th>
+                                <th style="width: 100px;">Số lượng</th>
+                                <th style="width: 150px;">Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for key, value in value.items %}
+                                <tr>
+                                    <td><img style="height: 120px;"
+                                        src="{{value.img.url}}" /></td>
+                                    <td><a href="javascript:void(0);"
+                                        style="font-size: 15px; color: black;">{{value.book.title}}</a></td>
+                                    <td>{{value.price|calcPrice:value.discount|format_money }}
+                                        ₫</td>
+                                    <td style="text-align: center">{{key.quanity}}</td>
+                                    <td
+                                        style="font-weight: 500; color: red; font-size: 15px; text-align: center">
+                                        {{value.price|calcPrice:value.discount|mul:key.quanity|format_money }}
+                                        ₫
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load filters %}
+<div id="banner">
+    <div id="demo" class="carousel slide" data-ride="carousel">
+
+        <ul class="carousel-indicators">
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+            <li data-target="#demo" data-slide-to="1"></li>
+            <li data-target="#demo" data-slide-to="2"></li>
+            <li data-target="#demo" data-slide-to="3"></li>
+        </ul>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'img/banner1.webp' %}" alt="Banner">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'img/banner2.webp' %}" alt="Banner">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'img/banner3.webp' %}" alt="Banner">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'img/banner4.webp' %}" alt="Banner">
+            </div>
+        </div>
+
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a> <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+
+    </div>
+</div>
+
+<div id="main">
+    <div class="container">
+
+        <div class="book">
+            <h3 class="tieu-de" style="margin-top: 50px; text-align: center;">LỊCH
+                SỬA TRUYỀN THỐNG</h3>
+            <div class="row">
+                {% for bookitem in bookItems1 %}
+                {% if forloop.counter < 5 %} 
+                <div class="col-md-3">
+                    <div style="text-align: center;">
+                        <a href="{% url 'detail' bookitem.barCode %}"><img src="{{bookitem.img.url}}" alt="product"></a>
+                    </div>
+                    <div class="infor" style="text-align: center;">
+                        <a href="{% url 'detail' bookitem.barCode %}">
+                            <h6>{{bookitem.book.title}}</h6>
+                        </a>
+
+                        {% if bookitem.discount > 0 %}
+                        <div class="gia-goc">
+                            <p class="gia-chinh">
+                                {{bookitem.price|format_money}}
+                                ₫
+                            </p>
+                            <p class="khuyen-mai">(Tiết kiệm: {{bookitem.discount}} %)</p>
+                        </div>
+
+                        {% endif %}
+                        <h6 class="gia-ban">
+                            {{bookitem.price|calcPrice:bookitem.discount|format_money }}
+                            ₫
+                        </h6>
+                        <a href="javascript:Shop.addToCart('{{bookitem.barCode}}');"><i class="fas fa-shopping-cart"></i>&nbsp;Mua ngay</a>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+    <div class="book">
+        <h3 class="tieu-de" style="margin-top: 20px; text-align: center;">KIẾN
+            THỨC KHOA HỌC</h3>
+            <div class="row">
+                {% for bookitem in bookItems2 %}
+                {% if forloop.counter < 5 %} 
+                <div class="col-md-3">
+                    <div style="text-align: center;">
+                        <a href="{% url 'detail' bookitem.barCode %}"><img src="{{bookitem.img.url}}" alt="product"></a>
+                    </div>
+                    <div class="infor" style="text-align: center;">
+                        <a href="{% url 'detail' bookitem.barCode %}">
+                            <h6>{{bookitem.book.title}}</h6>
+                        </a>
+
+                        {% if bookitem.discount > 0 %}
+                        <div class="gia-goc">
+                            <p class="gia-chinh">
+                                {{bookitem.price|format_money}}
+                                ₫
+                            </p>
+                            <p class="khuyen-mai">(Tiết kiệm: {{bookitem.discount}} %)</p>
+                        </div>
+
+                        {% endif %}
+                        <h6 class="gia-ban">
+                            {{bookitem.price|calcPrice:bookitem.discount|format_money }}
+                            ₫
+                        </h6>
+                        <a href="javascript:Shop.addToCart('{{bookitem.barCode}}');"><i class="fas fa-shopping-cart"></i>&nbsp;Mua ngay</a>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+    </div>
+
+    <div class="book">
+        <h3 class="tieu-de" style="margin-top: 20px; text-align: center;">VĂN HỌC VIỆT NAM</h3>
+        <div class="row">
+            {% for bookitem in bookItems3 %}
+            {% if forloop.counter < 5 %} 
+            <div class="col-md-3">
+                <div style="text-align: center;">
+                    <a href="{% url 'detail' bookitem.barCode %}"><img src="{{bookitem.img.url}}" alt="product"></a>
+                </div>
+                <div class="infor" style="text-align: center;">
+                    <a href="{% url 'detail' bookitem.barCode %}">
+                        <h6>{{bookitem.book.title}}</h6>
+                    </a>
+
+                    {% if bookitem.discount > 0 %}
+                    <div class="gia-goc">
+                        <p class="gia-chinh">
+                            {{bookitem.price|format_money}}
+                            ₫
+                        </p>
+                        <p class="khuyen-mai">(Tiết kiệm: {{bookitem.discount}} %)</p>
+                    </div>
+
+                    {% endif %}
+                    <h6 class="gia-ban">
+                        {{bookitem.price|calcPrice:bookitem.discount|format_money }}
+                        ₫
+                    </h6>
+                    <a href="javascript:Shop.addToCart('{{bookitem.barCode}}');"><i class="fas fa-shopping-cart"></i>&nbsp;Mua ngay</a>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="book">
+        <h3 class="tieu-de" style="margin-top: 20px; text-align: center;">VĂN HỌC NƯỚC NGOÀI</h3>
+        <div class="row">
+            {% for bookitem in bookItems4 %}
+            {% if forloop.counter < 5 %} 
+            <div class="col-md-3">
+                <div style="text-align: center;">
+                    <a href="{% url 'detail' bookitem.barCode %}"><img src="{{bookitem.img.url}}" alt="product"></a>
+                </div>
+                <div class="infor" style="text-align: center;">
+                    <a href="{% url 'detail' bookitem.barCode %}">
+                        <h6>{{bookitem.book.title}}</h6>
+                    </a>
+
+                    {% if bookitem.discount > 0 %}
+                    <div class="gia-goc">
+                        <p class="gia-chinh">
+                            {{bookitem.price|format_money}}
+                            ₫
+                        </p>
+                        <p class="khuyen-mai">(Tiết kiệm: {{bookitem.discount}} %)</p>
+                    </div>
+
+                    {% endif %}
+                    <h6 class="gia-ban">
+                        {{bookitem.price|calcPrice:bookitem.discount|format_money }}
+                        ₫
+                    </h6>
+                    <a href="javascript:Shop.addToCart('{{bookitem.barCode}}');"><i class="fas fa-shopping-cart"></i>&nbsp;Mua ngay</a>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="book">
+        <h3 class="tieu-de" style="margin-top: 20px; text-align: center;">TRUYỆN TRANH</h3>
+        <div class="row">
+            {% for bookitem in bookItems5 %}
+            {% if forloop.counter < 5 %} 
+            <div class="col-md-3">
+                <div style="text-align: center;">
+                    <a href="{% url 'detail' bookitem.barCode %}"><img src="{{bookitem.img.url}}" alt="product"></a>
+                </div>
+                <div class="infor" style="text-align: center;">
+                    <a href="{% url 'detail' bookitem.barCode %}">
+                        <h6>{{bookitem.book.title}}</h6>
+                    </a>
+
+                    {% if bookitem.discount > 0 %}
+                    <div class="gia-goc">
+                        <p class="gia-chinh">
+                            {{bookitem.price|format_money}}
+                            ₫
+                        </p>
+                        <p class="khuyen-mai">(Tiết kiệm: {{bookitem.discount}} %)</p>
+                    </div>
+
+                    {% endif %}
+                    <h6 class="gia-ban">
+                        {{bookitem.price|calcPrice:bookitem.discount|format_money }}
+                        ₫
+                    </h6>
+                    <a href="javascript:Shop.addToCart('{{bookitem.barCode}}');"><i class="fas fa-shopping-cart"></i>&nbsp;Mua ngay</a>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

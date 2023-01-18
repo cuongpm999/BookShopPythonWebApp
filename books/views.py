@@ -7,20 +7,22 @@ from django.views.generic import ListView, CreateView, UpdateView, DetailView
 
 # Create your views here.
 
-class ManageView(ListView):
+class ManageBookView(ListView):
     context_object_name = 'books'
-    queryset = Book.objects.all()
-    template_name = 'books/index.html'
+    queryset = Book.objects.filter(status=True)
+    template_name = 'manage/books/index.html'
 
 class AddBookView(CreateView):
     form_class = BookForm
-    template_name = 'books/add_edit.html'
+    template_name = 'manage/books/add_edit.html'
 
 class EditBookView(UpdateView):
     model = Book
     form_class = BookForm
-    template_name = 'books/add_edit.html'
+    template_name = 'manage/books/add_edit.html'
 
 def deleteBook(request,pk):
-    Book.objects.get(id=pk).delete()
-    return redirect('books:manage')
+    book = Book.objects.get(id=pk)
+    book.status = False
+    book.save()
+    return redirect('books:manage_book')

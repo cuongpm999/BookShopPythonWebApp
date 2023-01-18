@@ -1,0 +1,268 @@
+/*---------------------------------- HEADER ------------------------*/
+.header-top {
+	background-color: #c9cada;
+	border-bottom: 1px solid orange;
+}
+
+.header-top-left {
+	align-self: center;
+	color: #020528E6;
+}
+
+.header-top-right {
+	display: flex;
+	justify-content: flex-end;
+	line-height: 35px;
+	align-items: center;
+}
+
+.header-top-right a {
+	color: #020528E6;
+}
+
+.header-top-right a:hover {
+	text-decoration: none;
+	color: #4d5398e6;
+}
+
+.header-bottom {
+	background-color: #020528E6;
+	line-height: 50px;
+}
+
+.header-bottom ul a.nav-link {
+	color: white;
+	font-size: 16px;
+	font-weight: 600;
+	
+}
+
+.header-bottom ul a.dropdown-item {
+	font-weight: 600;
+	
+}
+
+.header-separator {
+	border-right: 1px solid #020528E6;
+	height: 18px;
+	margin: 0px 14px;
+}
+
+.nav-search input {
+	width: 100%;
+	height: 100%;
+	border: none;
+	outline: none;
+	font-size: 15px;
+	color: #333;
+	border-radius: 3px;
+	padding: 0px 10px;
+}
+
+.nav-search {
+	height: 40px;
+	display: flex;
+	background-color: white;
+	align-items: center;
+	border-radius: 3px;
+	padding: 0;
+}
+
+.nav-link {
+	position: relative;
+}
+
+.nav-link span {
+	position: absolute;
+	top: 10px;
+	right: calc(50% - 38px);
+	background-color: #c9cada;
+	color: #020528E6;
+	line-height: 14px;
+	font-size: 14px;
+	border-radius: 10px;
+	border: 2px solid #c9cada;
+	padding: 1px 7px;
+	font-weight: 700;
+}
+
+#header {
+	border-bottom: 2px solid orange;
+}
+
+/*------------------------------- BANNER ---------------------------*/
+#banner img {
+	width: 100%;
+}
+
+#banner ul li {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+}
+
+/* --------------------------------- MAIN --------------------------*/
+h3.tieu-de::after {
+	content: " ";
+	display: block;
+	width: 800px;
+	height: 2px;
+	background-color: rgba(219, 69, 31, 0.5);
+	margin: 0 auto;
+	margin-top: 5px;
+	margin-bottom: 30px;
+}
+
+#main .category .row .col-md-3 img {
+	width: 100%;
+}
+
+#main .category .row {
+	width: 50%;
+	margin: auto;
+}
+
+#main .row .col-md-3 {
+	margin-bottom: 20px;
+}
+
+#main .book .row .col-md-3 img {
+	width: 153px;
+}
+
+#main .row .col-md-3 .infor {
+	margin-top: 20px;
+}
+
+#main .row .col-md-3 .infor a {
+	color: black;
+}
+
+#main .row .col-md-3 .infor a h6 {
+	color: black;
+	height: 40px;
+	overflow: hidden;
+	font-size: 16px;
+}
+
+#main .row .col-md-3 .infor a h6:hover {
+	color: rgba(25, 0, 255, 0.959);
+}
+
+#main .row .col-md-3 img:hover {
+	transform: scale(1.1, 1.1);
+}
+
+#main .row .col-md-3 a {
+	text-decoration: none;
+}
+
+#main .row .col-md-3 a.btn {
+	color: white;
+}
+
+#main .row .col-md-3 .infor .gia-goc {
+	/* display: flex;
+	justify-content: space-around; */
+}
+
+#main .row .col-md-3 .infor .gia-goc .gia-chinh {
+	color: #666;
+	font-size: 18px;
+	font-weight: 600;
+	display: inline-block;
+	margin-right: 10px;
+	text-decoration: line-through;
+}
+
+#main .row .col-md-3 .infor .gia-goc .khuyen-mai {
+	color: red;
+	display: inline-block;
+	font-size: 12px;
+	margin-bottom: 5px;
+}
+
+#main .row .col-md-3 .infor h6.gia-ban {
+	font-size: 22px;
+}
+
+#main .row .col-md-3 .infor a:hover {
+	color: rgba(25, 0, 255, 0.959);
+}
+
+/*---------------------- FOOTER --------------------------*/
+#footer {
+	border-top: 2px solid orange;
+	margin-top: 55px;
+	background-color: rgba(2, 5, 40, 0.9);
+	padding-top: 20px;
+	color: aliceblue;
+}
+
+#footer ul {
+	padding-left: 0;
+}
+
+#footer ul li a {
+	text-decoration: none;
+	color: rgb(186, 223, 218);
+	font-size: 17px;
+	line-height: 35px;
+}
+
+#footer ul li {
+	list-style: none;
+}
+
+#footer ul li a:hover {
+	color: rgba(0, 238, 255, 0.959);
+}
+
+#footer h4 {
+	color: orange;
+	font-size: 25px;
+	font-weight: 700;
+}
+
+#footer h5 {
+	font-weight: 700;
+}
+
+#onTop{
+    width:40px;
+    display:none
+}
+#toTop{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    cursor:pointer
+}
+#hotline_img {
+	width: 65px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 8px;
+	border-radius: 50%;
+	position: relative;
+	animation-name: example;
+	animation-duration: 4s;
+	animation-iteration-count: infinite
+}
+
+#hotline {
+	position: fixed;
+	left: 22px;
+	bottom: 87px;
+	cursor: pointer
+}
+
+@keyframes example {
+	from {
+		border: 5px solid rgba(188, 192, 194, .4)
+	}
+	to {
+		border: 10px solid rgba(188, 192, 194, .4)
+	}
+}

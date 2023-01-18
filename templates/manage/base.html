@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="ban laptop uy tin, chat luong, dich vu tot">
+    <meta name="keywords" content="laptop, asus, dell, hp, lenovo, acer, apple, msi, lg">
+    <meta name="author" content="CuongPham">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load static %}
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/manage.css' %}">
+
+
+    <!-- JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/fontawesome.min.js' %}"></script>
+    <script src="{% static 'js/shop_home.js' %}"></script>
+
+    <title>Book Store Online</title>
+</head>
+
+<body>
+    <!-- MAIN -->
+    <div id="main">
+        <div class="sidebar">
+            <div class="sidebar-inner">
+                <div class="sidebar-logo">
+                    <a class="sidebar-link" href=""> <img class="icon"
+                            src="{% static 'img/logo.png' %}">
+                        <h5 class="logo-text">Admin Manage</h5>
+                    </a>
+                </div>
+
+                <nav class="navbar scrollbar" id="style-1">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="/BookStoreOnline/admin"><i
+                                    class="fas fa-home"></i>Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/BookStoreOnline/admin/manage/author"><i
+                                    class="fas fa-pencil-alt"></i>Manage author</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/BookStoreOnline/admin/manage/publisher"><i
+                                    class="fas fa-warehouse"></i>Manage publisher</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'books:manage_book' %}"><i
+                                    class="fas fa-book-open"></i>Manage book</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'manage_bookitem' %}"><i
+                                    class="fas fa-book-reader"></i>Manage book item</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/BookStoreOnline/admin/manage/customer"><i
+                                    class="fas fa-users"></i>Manage customer</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/BookStoreOnline/admin/manage/staff"><i
+                                    class="fas fa-user-tie"></i>Manage staff</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/BookStoreOnline/admin/manage/order"><i
+                                    class="fas fa-shopping-cart"></i>Manage order</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/BookStoreOnline/admin/manage/shipment"><i
+                                    class="fas fa-shipping-fast"></i>Manage shipment</a></li>
+                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbardrop"
+                                data-toggle="dropdown"><i class="fas fa-chart-bar"></i>Statistics</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/BookStoreOnline/admin/statistic/book-item">Thống kê
+                                    top 9 quyển sách<br>được bán chạy nhất
+                                </a> <a class="dropdown-item" href="/BookStoreOnline/admin/statistic/customer">Thống kê
+                                    top
+                                    9 khách hàng<br>chi mua nhiều nhất
+                                </a> <a class="dropdown-item" href="/BookStoreOnline/admin/statistic/shipment">Thống kê
+                                    top
+                                    shipment<br>được sửa dụng nhiều nhất
+                                </a> <a class="dropdown-item" href="/BookStoreOnline/admin/statistic/income">Thống kê
+                                    thu nhập theo<br>một tháng của năm nào đó
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+
+                </nav>
+            </div>
+        </div>
+        <div class="page-container">
+            <div class="header-container">
+                <nav class="navbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbardrop"
+                                data-toggle="dropdown"><img class="icon" alt="user"
+                                    src="{% static 'img/icons8-user-male-100.png' %}">
+                                <div class="text-icon">admin</div>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/BookStoreOnline/admin/view-profile-staff"><i
+                                        class="far fa-user"></i>Profile</a> <a class="dropdown-item"
+                                    href="/BookStoreOnline/logout-staff"><i class="fas fa-power-off"></i>Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="main-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-add"> 
+                            {% block content %}
+                            {% endblock %}
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                ©
+                <script>
+                    var now = new Date();
+                    document.write(now.getFullYear());
+                </script>
+                Copyright: <a href="https://www.facebook.com/cuongphamptit999/">
+                    CuongPham.com</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,244 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load filters %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/category.css' %}">
+
+<div id="main" class="container all-item">
+    <h4 class="tieude-tp">DANH MỤC SÁCH</h4>
+    <div class="loc-sp">
+        <span class="title-x">LỌC SẢN PHẨM</span>
+        <div class="danh-muc">
+            <span class="title">DANH MỤC</span>
+            <ul class="list-unstyled">
+                <li><a href="{% url 'collection' %}"><i class="fas fa-angle-double-right"></i> Tất cả</a></li>
+                <li><a href="javascript:Shop.addUrlParameter('category', 'Lịch sử truyền thống')"><i
+                            class="fas fa-angle-double-right"></i> Lịch sử truyền thống</a></li>
+                <li><a href="javascript:Shop.addUrlParameter('category', 'Kiến thức khoa học')"><i
+                            class="fas fa-angle-double-right"></i> Kiến thức khoa học</a></li>
+                <li><a href="javascript:Shop.addUrlParameter('category', 'Văn học Việt Nam')"><i
+                            class="fas fa-angle-double-right"></i> Văn học Việt Nam</a></li>
+                <li><a href="javascript:Shop.addUrlParameter('category', 'Văn học nước ngoài')"><i
+                            class="fas fa-angle-double-right"></i> Văn học nước ngoài</a></li>
+                <li><a href="javascript:Shop.addUrlParameter('category', 'Truyện tranh')"><i
+                            class="fas fa-angle-double-right"></i> Truyện tranh</a></li>
+            </ul>
+        </div>
+
+        <div class="danh-muc">
+            <span class="title">TÁC GIẢ</span>
+            <ul class="list-unstyled">
+                {% if request.GET.author_ == None %}
+                {% for author in authors %}
+                <li><a href="javascript:void(0);" onclick="Shop.addUrlParameter('author_', {{author.id}})"><i
+                            class="far fa-square"></i> {{author.name}}</a></li>
+                {% endfor %}
+                {% elif request.GET.author_ %}
+                {% for author in authorsAll %}
+                {% if request.GET.author_ == author.id|toStr %}
+                <li><a href="javascript:void(0);" onclick="Shop.deleteUrlParameter('author_')"><i
+                            class="far fa-check-square"></i> {{author.name}}</a></li>
+                {% endif %}
+                {% endfor %}
+
+                {% endif %}
+            </ul>
+        </div>
+        <div class="danh-muc">
+            <span class="title">NHÀ XUẤT BẢN</span>
+            <ul class="list-unstyled">
+                {% if request.GET.publisher_ == None %}
+                {% for publisher in publishers %}
+                <li><a href="javascript:void(0);" onclick="Shop.addUrlParameter('publisher_', {{publisher.id}})"><i
+                            class="far fa-square"></i> {{publisher.name}}</a></li>
+                {% endfor %}
+                {% elif request.GET.publisher_ %}
+                {% for publisher in publishersAll %}
+                {% if request.GET.publisher_ == publisher.id|toStr %}
+                <li><a href="javascript:void(0);" onclick="Shop.deleteUrlParameter('publisher_')"><i
+                            class="far fa-check-square"></i> {{publisher.name}}</a></li>
+
+                {% endif %}
+                {% endfor %}
+
+                {% endif %}
+            </ul>
+        </div>
+        <div class="khoang-gia">
+            <span class="title">KHOẢNG GIÁ</span>
+            <ul class="list-unstyled">
+                {% if request.GET.price == None %}
+                <li><a href="javascript:void(0);" onclick="Shop.addUrlParameter('price', 'duoi50')"><i
+                            class="far fa-square"></i> Dưới 50.000 ₫</a></li>
+                <li><a href="javascript:void(0);" onclick="Shop.addUrlParameter('price', '50den100')"><i
+                            class="far fa-square"></i> Từ 50.000 đ đến 100.000 ₫</a></li>
+                <li><a href="javascript:void(0);" onclick="Shop.addUrlParameter('price', '100den200')"><i
+                            class="far fa-square"></i> Từ 100.000 ₫ đến 200.000 ₫</a></li>
+                <li><a href="javascript:void(0);" onclick="Shop.addUrlParameter('price', '200den300')"><i
+                            class="far fa-square"></i> Từ 200.000 ₫ đến 300.000 ₫</a></li>
+                <li><a href="javascript:void(0);" onclick="Shop.addUrlParameter('price', 'tren300')"><i
+                            class="far fa-square"></i> Trên 300.000 ₫</a></li>
+
+                {% elif request.GET.price == 'duoi50' %}
+                <li><a href="javascript:void(0);" onclick="Shop.deleteUrlParameter('price')"><i
+                            class="far fa-check-square"></i> Dưới 50.000 ₫</a></li>
+                {% elif request.GET.price == '50den100' %}
+
+                <li><a href="javascript:void(0);" onclick="Shop.deleteUrlParameter('price')"><i
+                            class="far fa-check-square"></i> Từ 50.000 ₫ đến 100.000 ₫</a></li>
+                {% elif request.GET.price == '100den200' %}
+
+                <li><a href="javascript:void(0);" onclick="Shop.deleteUrlParameter('price')"><i
+                            class="far fa-check-square"></i> Từ 100.000 ₫ đến 200.000 ₫</a></li>
+                {% elif request.GET.price == '200den300' %}
+
+                <li><a href="javascript:void(0);" onclick="Shop.deleteUrlParameter('price')"><i
+                            class="far fa-check-square"></i> Từ 200.000 ₫ đến 300.000 ₫</a></li>
+                {% elif request.GET.price == 'tren300' %}
+
+                <li><a href="javascript:void(0);" onclick="Shop.deleteUrlParameter('price')"><i
+                            class="far fa-check-square"></i> Trên 300.000 ₫</a></li>
+                {% endif %}
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="product-sp">
+        <div class="product-list">
+            <div class="list-sort" style="margin-bottom: 10px;">
+                {% if request.GET.sort == None or request.GET.sort == '' %}
+                <select id="sort-select" onchange="Shop.addUrlParameter('sort', this.value)">
+                    <option value="" selected>Sắp xếp sản phẩm</option>
+                    <option value="low-to-high">Giá tăng dần</option>
+                    <option value="high-to-low">Giá giảm dần</option>
+                    <option value="moi-nhat">Mới nhất</option>
+                </select>
+                {% elif request.GET.sort == 'low-to-high' %}
+                <select id="sort-select" onchange="Shop.addUrlParameter('sort', this.value)">
+                    <option value="">Sắp xếp sản phẩm</option>
+                    <option value="low-to-high" selected>Giá tăng dần</option>
+                    <option value="high-to-low">Giá giảm dần</option>
+                    <option value="moi-nhat">Mới nhất</option>
+                </select>
+                {% elif request.GET.sort == 'high-to-low' %}
+                <select id="sort-select" onchange="Shop.addUrlParameter('sort', this.value)">
+                    <option value="">Sắp xếp sản phẩm</option>
+                    <option value="low-to-high">Giá tăng dần</option>
+                    <option value="high-to-low" selected>Giá giảm dần</option>
+                    <option value="moi-nhat">Mới nhất</option>
+                </select>
+                {% elif request.GET.sort == 'moi-nhat' %}
+                <select id="sort-select" onchange="Shop.addUrlParameter('sort', this.value)">
+                    <option value="">Sắp xếp sản phẩm</option>
+                    <option value="low-to-high">Giá tăng dần</option>
+                    <option value="high-to-low">Giá giảm dần</option>
+                    <option value="moi-nhat" selected>Mới nhất</option>
+                </select>
+                {% endif %}
+
+                {% if request.GET.state == None or request.GET.state == '' %}
+                <select id="sort-select" onchange="Shop.addUrlParameter('state', this.value)">
+                    <option value="" selected>Tất cả</option>
+                    <option value="khuyen-mai">Khuyến mại</option>
+                </select>
+                {% elif request.GET.state == 'khuyen-mai' %}
+                <select id="sort-select" onchange="Shop.addUrlParameter('state', this.value)">
+                    <option value="">Tất cả</option>
+                    <option value="khuyen-mai" selected>Khuyến mại</option>
+                </select>
+                {% endif %}
+
+            </div>
+
+            <div class="list-book">
+                <div class="row">
+                    {% for bookitem in bookItems %}
+                    <div class="col-md-3">
+                        <div style="text-align: center;">
+                            <a href="{% url 'detail' bookitem.barCode %}"><img src="{{bookitem.img.url}}"
+                                    alt="product"></a>
+                        </div>
+                        <div class="infor" style="text-align: center;">
+                            <a href="{% url 'detail' bookitem.barCode %}">
+                                <h6>{{bookitem.book.title}}</h6>
+                            </a>
+
+                            {% if bookitem.discount > 0 %}
+                            <div class="gia-goc">
+                                <p class="gia-chinh">
+                                    {{bookitem.price|format_money}}
+                                    ₫
+                                </p>
+                                <p class="khuyen-mai">(Tiết kiệm: {{bookitem.discount}} %)</p>
+                            </div>
+
+                            {% endif %}
+                            <h6 class="gia-ban">
+                                {{bookitem.price|calcPrice:bookitem.discount|format_money }}
+                                ₫
+                            </h6>
+                            <a href="javascript:Shop.addToCart('{{bookitem.barCode}}');"><i class="fas fa-shopping-cart"></i>&nbsp;Mua ngay</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="text-center" style="margin-top: 40px;">
+                <ul class="page-numbers">
+                    <li><a class="prev page-numbers" href="javascript:Shop.goPrev()"><i
+                                class="fas fa-angle-left"></i></a></li>
+                    <li>
+                        {% if request.GET.page != 1|toStr and request.GET.page %}
+                        <a class="page-numbers" href="javascript:Shop.addUrlParameter('page', 1)">1</a>
+                        {% elif request.GET.page == 1|toStr or request.GET.page == None %}
+                        <span aria-current="page" class="page-numbers current">1</span>
+                        {% endif %}
+                    </li>
+                    <li>
+                        {% if request.GET.page != 2|toStr %}
+                        <a class="page-numbers" href="javascript:Shop.addUrlParameter('page', 2)">2</a>
+                        {% elif request.GET.page == 2|toStr %}
+                        <span aria-current="page" class="page-numbers current">2</span>
+                        {% endif %}
+                    </li>
+
+                    <li>
+                        {% if request.GET.page != 3|toStr %}
+                        <a class="page-numbers" href="javascript:Shop.addUrlParameter('page', 3)">3</a>
+                        {% elif request.GET.page == 3|toStr %}
+                        <span aria-current="page" class="page-numbers current">3</span>
+                        {% endif %}
+                    </li>
+
+                    <li>
+                        {% if request.GET.page != 4|toStr %}
+                        <a class="page-numbers" href="javascript:Shop.addUrlParameter('page', 4)">4</a>
+                        {% elif request.GET.page == 4|toStr %}
+                        <span aria-current="page" class="page-numbers current">4</span>
+                        {% endif %}
+                    </li>
+
+                    <li>
+                        {% if request.GET.page != 5|toStr %}
+                        <a class="page-numbers" href="javascript:Shop.addUrlParameter('page', 5)">5</a>
+                        {% elif request.GET.page == 5|toStr %}
+                        <span aria-current="page" class="page-numbers current">5</span>
+                        {% endif %}
+                    </li>
+                    <li><a class="next page-numbers" href="javascript:Shop.goNext()"><i
+                                class="fas fa-angle-right"></i></a></li>
+                </ul>
+            </div>
+
+
+
+        </div>
+    </div>
+
+</div>
+<div class="clear-with-height"></div>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+body {
+	background-color: #ededed
+}
+
+.hoadon .header_hoadon img {
+	width: 150px;
+	margin-top: -25px;
+	margin-left: -17px
+}
+
+.hoadon .header_hoadon span.display {
+	display: block;
+	margin-top: -15px;
+	font-size: 17px;
+	font-weight: 700;
+	letter-spacing: 2px;
+	color: #fa9f2c;
+	text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff
+}
+
+.hoadon {
+	padding-left: 60px;
+	padding-right: 60px;
+	padding-top: 70px;
+	background: #fff;
+	border-radius: 3px;
+	padding-bottom: 150px
+}
+
+.hoadon h3 {
+	text-align: center
+}
+
+.hoadon .header_hoadon .col-md-3.ma_hoadon h6 {
+	margin-left: 75px
+}
+
+.hoadon .congty_hoadon span.chuthich {
+	font-size: 18px;
+	font-weight: 600
+}
+
+.hoadon .congty_hoadon span.congty {
+	font-size: 23px;
+	font-weight: 650;
+	color: #00f
+}
+
+.hoadon .congty_hoadon span.thongtin {
+	font-size: 17px;
+	font-weight: 500
+}
+
+.hoadon .congty_hoadon span.tenkhach {
+	font-size: 20px;
+	font-weight: 700
+}
+
+.hoadon table img {
+	height: 222px
+}
+
+.hoadon table h5 {
+	font-size: 18px
+}
+
+.hoadon table tr td.tensanpham {
+	width: 600px
+}
+
+.hoadon table span {
+	font-size: 17px;
+	font-weight: 600
+}
+
+.hoadon .tongtienthanhtoan {
+	font-size: 20px;
+	font-weight: 500
+}

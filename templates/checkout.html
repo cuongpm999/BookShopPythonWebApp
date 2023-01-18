@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load filters %}
+{% load mathfilters %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/cart.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/buy-now.css' %}">
+<div id="main">
+    <div class="container" style="padding: 0;">
+        <div class="type-address">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Địa Chỉ Nhận Hàng</h1>
+                </div>
+            </div>
+            <div class="form-check radio-address">
+
+                <span class="name-customer">{{customer.fullName.firstName}}
+                    {{customer.fullName.lastName}}</span> <span class="address-customer">{{customer.address.number}}
+                    {{customer.address.street}} {{customer.address.district}}
+                    {{customer.address.city}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row header-title text-center d-flex">
+            <div class="col-4">Sản phẩm</div>
+            <div class="col-3">Đơn giá</div>
+            <div class="col-2">Số lượng</div>
+            <div class="col-3">Thành tiền</div>
+        </div>
+
+        {% for key, value in lineBookItems.items %}
+        <div class="row item text-center">
+            <div class="col-4 text-center">
+                <div class="row">
+                    <div class="col-4">
+                        <a href="{% url 'detail' value.barCode %}"><img src="{{value.img.url}}" class="img-fluid"
+                                alt="bookItem" /></a>
+                    </div>
+                    <div class="col-8" style="align-self: center; word-break: break-all;">
+                        <a href="{% url 'detail' value.barCode %}">{{value.book.title}}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3" style="align-self: center; word-break: break-all;">
+                {{value.price|calcPrice:value.discount|format_money }} ₫
+            </div>
+            <div class="col-2" style="align-self: center; word-break: break-all;">{{key.quanity}}</div>
+            <div class="col-3" style="align-self: center; word-break: break-all;">
+                {{value.price|calcPrice:value.discount|mul:key.quanity|format_money }} ₫
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="container payment-method-type-delivery">
+        <div class="row payment-method">
+            <h4>Phương thức thanh toán</h4>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active method-payment" onclick="Shop.setPaymentWith('Cash')"><a
+                        href="#tab-01" aria-controls="tab-01" role="tab" data-toggle="tab">Thanh toán
+                        khi nhận hàng</a></li>
+                <li class="method-payment" role="presentation" onclick="Shop.setPaymentWith('DigitalWallet')"><a
+                        href="#tab-02" aria-controls="tab-02" role="tab" data-toggle="tab">Digital
+                        Wallet</a></li>
+                <li class="method-payment" role="presentation" onclick="Shop.setPaymentWith('Credit')"><a href="#tab-03"
+                        aria-controls="tab-03" role="tab" data-toggle="tab">Credit</a></li>
+            </ul>
+        </div>
+        <form action="{% url 'checkout_post' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="paymentWith" value="Cash" id="paymentWith" />
+            <div class="row">
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="tab-01">
+                        Thanh toán khi nhận hàng.</div>
+                    <div role="tabpanel" class="tab-pane" id="tab-02">
+                        <div class="row">
+                            <select class="form-control" style="margin-left: 10px" name="paymentType">
+                                <option value="Thanh toán bằng Paypal">Thanh toán bằng
+                                    Paypal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="tab-03">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="cc-name">Name on card</label> <input type="text" class="form-control"
+                                    id="cc-name" name="cc-name" placeholder="Nhập loại thẻ" />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="cc-number">Credit card number</label> <input type="text"
+                                    class="form-control" id="cc-number" name="cc-number" placeholder="Nhập mã số thẻ" />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="cc-expiration">Expiration</label> <input type="text" class="form-control"
+                                    id="cc-expiration" name="cc-expiration" placeholder="Nhập hạn dùng" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h4>Phương thức vận chuyển</h4>
+                <select class="form-control" style="margin-left: 10px; width: auto;"
+                    onchange="Shop.selectShipment(value,{{cart.totalAmount}})" name="shipmentId">
+                    {% for shipment in shipments %}
+                    <option value="{{shipment.id}}">{{shipment.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="row summary">
+                <div class="col-8" style="align-self: center"></div>
+                <div class="col-4" style="align-self: center">
+                    <h4 class="summary-left">
+                        Tổng tiền hàng <span class="summary-right" style="float: right">
+                            {{cart.totalAmount|format_money }} ₫
+                        </span>
+                    </h4>
+                    <h4 class="summary-left">
+                        Phí vận chuyển<span class="summary-right" style="float: right" id="shipment-price">
+                            {{defaultPriceShipment|format_money }} ₫
+                        </span>
+                    </h4>
+                    <h4 class="summary-left">
+                        Tổng thanh toán:<span class="summary-right red-color" style="float: right" id="payment-price">
+                            {{cart.totalAmount|add:defaultPriceShipment|format_money }} ₫
+                        </span>
+                    </h4>
+                    <button type="submit" class="btn btn-danger button-submit">
+                        Đặt hàng</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

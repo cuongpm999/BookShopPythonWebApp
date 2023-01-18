@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load filters %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/item-detail.css' %}">
+
+<div id="main" class="container ">
+    <div class="information">
+        <div class="row">
+            <div class="detail-img col-md-5">
+                <img
+                    src="{{bookitem.img.url}}"
+                    alt="product">
+                <div class="list-img">
+                    <img
+                        src="{{bookitem.img.url}}"
+                        alt="product">
+                </div>
+            </div>
+
+            <div class="col-md-7" style="margin-left: -55px;">
+                <div>
+                    <h4>{{bookitem.book.title}}</h4>
+                </div>
+                <div style="margin-top: 30px;">
+                    <table class="table" style="width: 400px">
+                        <tbody>
+                            <tr>
+                                <td>Thể loại</td>
+                                <td>{{bookitem.book.category}}</td>
+                            </tr>
+                            <tr>
+                                <td>Tác giả</td>
+                                <td>{{bookitem.book.authors.all|join:", " }}</td>
+                            </tr>
+                            <tr>
+                                <td>Nhà xuất bản</td>
+                                <td>{{bookitem.book.publisher.name }}</td>
+                            </tr>
+                            <tr>
+                                <td>Số trang</td>
+                                <td>{{bookitem.book.pages }}</td>
+                            </tr>
+                            <tr>
+                                <td>Ngôn ngữ</td>
+                                <td>{{bookitem.book.language }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="display: flex; align-items: center">
+                    <h3 class="price" style="color: #d51c24; margin-right: 20px;">
+                        {{bookitem.price|calcPrice:bookitem.discount|format_money }}
+                        ₫
+                    </h3>
+                    {% if bookitem.discount > 0 %}
+                            <h4
+                                style="text-decoration: line-through; line-height: 35px; color: #666; margin-right: 20px;">
+                                {{bookitem.price|format_money}}
+                                ₫
+                            </h4>
+                            <span style="color: red; font-size: 15px">(Bạn tiết kiệm
+                                được {{bookitem.discount}} %)</span>
+                    {% endif %}
+                </div>
+                <div class="table-mid" style="margin-top: 20px">
+                    <div class="button" style="display: flex">
+                        <a
+                            href="javascript:Shop.addToCart('{{bookitem.barCode}}');"
+                            class="btn1"
+                            style="background-color: #ffeee8; line-height: 46px; margin-right: 40px; color: #ee4d2d;">
+                            <i class="fas fa-cart-plus"></i> Thêm vào giỏ hàng
+                        </a> <a
+                            href="javascript:Shop.addToCartNow('{{bookitem.barCode}}')"
+                            class="btn2"
+                            style="line-height: 46px; color: white; font-size: 16px; font-weight: 600;">MUA
+                            NGAY</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="book">
+        <h4 class="mb-3">Mô tả đánh giá</h4>
+        <div
+            style="font-size: 15px">
+            {{bookitem.book.summary }}</div>
+    </div>
+
+     <div class="book">
+        <h4 class="mb-4">Các sản phẩm tương tự</h4>
+        <div class="row">
+            {% for bookitem in bookItemSames %}
+            {% if forloop.counter < 5 %} 
+            <div class="col-md-3">
+                <div style="text-align: center;">
+                    <a href="{% url 'detail' bookitem.barCode %}"><img src="{{bookitem.img.url}}" alt="product"></a>
+                </div>
+                <div class="infor" style="text-align: center;">
+                    <a href="{% url 'detail' bookitem.barCode %}">
+                        <h6>{{bookitem.book.title}}</h6>
+                    </a>
+
+                    {% if bookitem.discount > 0 %}
+                    <div class="gia-goc">
+                        <p class="gia-chinh">
+                            {{bookitem.price|format_money}}
+                            ₫
+                        </p>
+                        <p class="khuyen-mai">(Tiết kiệm: {{bookitem.discount}} %)</p>
+                    </div>
+
+                    {% endif %}
+                    <h6 class="gia-ban">
+                        {{bookitem.price|calcPrice:bookitem.discount|format_money }}
+                        ₫
+                    </h6>
+                    <a href=""><i class="fas fa-shopping-cart"></i>&nbsp;Mua ngay</a>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="book">
+        <h4 class="mb-3">Hỏi đáp về sản phẩm</h4>
+        <div class="comment-fb">
+            <div class="fb-comments"
+                data-href="https://developers.facebook.com/docs/plugins/{{bookitem.barCode}}"
+                data-width="100%" data-numposts="5"></div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

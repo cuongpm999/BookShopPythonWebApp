@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load filters %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+<div id="main" class="container lienhe">
+    <h4 class="tieude-tp">PAY WITH PAYPAL</h4>
+    <div class="row card">
+        <div class="col-md-12" style="padding: 10px;">
+            <div class="card-body">
+                <div class="panel-body" style="text-align: center">
+                    {{ form.render }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

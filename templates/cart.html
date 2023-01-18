@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+{% load filters %}
+{% load mathfilters %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/cart.css' %}">
+<div id="main" class="container">
+    <h4 class="tieude-tp">GIỎ HÀNG CỦA BẠN</h4>
+    {% if status == 'success' %}
+    <div class="alert alert-success">
+        <strong>Success!</strong> Bạn đã đặt hàng thành công!
+    </div>
+    {% elif status == 'failed' %}
+    <div class="alert alert-danger">
+        <strong>Faile!</strong> Bạn đã đặt hàng thất bại!
+    </div>
+    {% endif %}
+
+    {% if request.session.totalQuantity > 0 %}
+
+    <div class="row header-title text-center d-flex">
+        <div class="col-4">Sản phẩm</div>
+        <div class="col-2">Đơn giá</div>
+        <div class="col-2">Số lượng</div>
+        <div class="col-2">Thành tiền</div>
+        <div class="col-2"></div>
+    </div>
+
+    {% for key, value in lineBookItems.items %}
+    <div class="row item text-center">
+        <div class="col-4 text-center">
+            <div class="row">
+                <div class="col-4">
+                    <a href="{% url 'detail' value.barCode %}"><img src="{{value.img.url}}" class="img-fluid"
+                            alt="bookItem" /></a>
+                </div>
+                <div class="col-8" style="align-self: center; word-break: break-all;">
+                    <a href="{% url 'detail' value.barCode %}">{{value.book.title}}</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-2" style="align-self: center; word-break: break-all;">
+            {{value.price|calcPrice:value.discount|format_money }} ₫
+        </div>
+        <div class="col-2" style="align-self: center; word-break: break-all;">
+            <input class="form-control" value="{{key.quanity}}" type="number" min=1
+                style="width: 70px; margin: auto; text-align: center;" id="quantity{{value.barCode}}"
+                onchange="Shop.editCart('{{value.barCode}}')">
+        </div>
+        <div class="col-2" style="align-self: center; word-break: break-all;" id="price{{value.barCode}}">
+            {{value.price|calcPrice:value.discount|mul:key.quanity|format_money }} ₫
+        </div>
+        <div class="col-2" style="align-self: center;">
+            <a href="javascript:void(0);" onclick="Shop.deleteCart('{{value.barCode}}')" style="color: black;"><i
+                    class="far fa-trash-alt"></i></a>
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="card-body row" style="justify-content: flex-end; background: white; margin-top: 10px">
+        <div class="tongtienthanhtoan">
+            Tổng tiền đơn hàng: <strong id="total_value">{{cart.totalAmount|format_money }}₫</strong>
+        </div>
+    </div>
+    <div class="row" style="justify-content: flex-end; margin-top: 20px">
+        <a href="{% url 'checkout' %}" class="btn btn-success button-buy-submit-cart">Tiến hành đặt
+            hàng</a>
+    </div>
+    {% elif request.session.totalQuantity == None or request.session.totalQuantity == 0 %}
+    <div class="no-cart">
+        <img alt="nocart" src="{% static 'img/no_cart.png' %}">
+    </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

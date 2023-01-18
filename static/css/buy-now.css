@@ -1,0 +1,202 @@
+.type-address {
+	margin-top: 60px;
+	background-color: rgb(255, 255, 255);
+	border: 1px solid rgba(0, 0, 0, 0.09);
+	padding: 20px 30px;
+}
+
+.type-address h1 {
+	display: flex;
+	align-items: center;
+	font-size: 1.125rem;
+	color: rgb(238, 77, 45);
+	margin-bottom: 20 px;
+	text-transform: capitalize;
+	flex: 1 1 auto;
+	margin-bottom: 20px;
+}
+
+.radio-address {
+	align-items: center;
+	padding: 9px 24px;
+}
+
+span.name-customer {
+	font-weight: 700;
+	color: rgb(34, 34, 34);
+}
+
+span.address-customer {
+	margin-left: 20px;
+	word-break: break-word;
+}
+
+.payment-method-type-delivery {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	padding: 40px;
+	background-color: rgb(255, 255, 255);
+	border: 1px solid rgba(0, 0, 0, 0.09);
+}
+
+.payment-method h1 {
+	font-size: 1.125rem;
+	width: 12.5rem;
+	color: rgb(34, 34, 34);
+}
+
+.summary {
+	
+}
+
+.summary .summary-left {
+	font-size: 14px;
+	color: rgba(0, 0, 0, 0.54);
+}
+
+.summary .summary-right {
+	font-size: 14px;
+	color: rgba(0, 0, 0, 0.54);
+	justify-self: center;
+}
+
+.summary .red-color {
+	height: 50px;
+	font-size: 28px;
+	color: rgb(238, 77, 45);
+}
+
+h4 {
+	font-size: 20px;
+	margin-top: 10px;
+	font-weight: 700;
+}
+
+.nav-tabs {
+	border-bottom: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+li.method-payment {
+	font-size: 12px;
+	font-weight: 600;
+	border-radius: 2px;
+	height: 2.5rem;
+	display: flex;
+	align-items: center;
+	display: inline-flex;
+	margin-bottom: 0;
+	color: #000;
+	border: 1px solid gray;
+	margin-left: 15px;
+	padding: 10px;
+}
+
+li.method-payment a {
+	color: #000;
+	font-size: 16px;
+}
+
+.tab-pane {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+html, body {
+	min-height: 100vh;
+	min-width: 100vw;
+}
+
+.parent {
+	height: 100vh;
+}
+
+.parent>.row {
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+
+.col img {
+	height: 100px;
+	width: 100%;
+	cursor: pointer;
+	transition: transform 1s;
+	object-fit: cover;
+}
+
+.col label {
+	overflow: hidden;
+	position: relative;
+}
+
+.imgbgchk:checked+label>.tick_container {
+	opacity: 1;
+}
+/*         aNIMATION */
+.imgbgchk:checked+label>img {
+	transform: scale(1.25);
+	opacity: 0.3;
+}
+
+.tick_container {
+	transition: 0.5s ease;
+	opacity: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	cursor: pointer;
+	text-align: center;
+}
+
+.tick {
+	background-color: #4caf50;
+	color: white;
+	font-size: 16px;
+	padding: 6px 12px;
+	height: 40px;
+	width: 40px;
+	border-radius: 100%;
+	border: 1px solid gray;
+}
+
+#tab-02 {
+	display: flex;
+}
+
+label {
+	border: 1px solid white;
+}
+
+.tab-pane {
+	display: none !important;
+}
+
+.tab-content>.active {
+	display: block !important;
+}
+
+.button-submit {
+	padding: 20px
+}
+
+button.btn.btn-danger.button-submit {
+	width: 100%;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.required:before {
+	content: "* ";
+	color: red
+}
+
+#exampleModal label {
+	font-size: 18px;
+	font-weight: 600;
+}

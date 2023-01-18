@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="app mua sách">
+    <meta name="keywords" content="app, mua, sách">
+    <meta name="author" content="CuongPham">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load static %}
+
+    <!-- CSS & JS -->
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+
+
+    <!-- JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/fontawesome.min.js' %}"></script>
+    <script src="{% static 'js/shop_home.js' %}"></script>
+    <!--  -->
+
+    <title>Book Store Online</title>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <div id="header">
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 header-top-left">
+                        <i class="fas fa-user"></i> Cường Phạm - Architecture Design
+                    </div>
+
+                    <div class="col-md-6 header-top-right">
+                        {% if request.session.customerLogin == None %}
+                        <a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"> </i>&nbsp;&nbsp;Đăng
+                            nhập </a>
+                        <div class="header-separator"></div>
+                        <a href="{% url 'register' %}">Đăng kí</i></a>
+                        {% elif request.session.customerLogin %}
+                        <span style="color: #020528E6"><a href="{% url 'view_profile' %}"><i class="fas fa-user"></i>
+                                {{request.session.customerLogin }}</a></span>
+                        <div class="header-separator"></div>
+                        <a href="{% url 'myorder' %}"><i class="fas fa-clipboard"> </i> Đơn
+                            hàng của tôi</a>
+                        <div class="header-separator"></div>
+                        <a href="{% url 'logout' %}">Đăng xuất</a>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="header-bottom">
+            <div class="container">
+                <div class="row d-flex align-items-center">
+                    <div class="col-md-2">
+                        <a href="{% url 'home' %}"><img src="{% static 'img/logo.png' %}" style="width: 55px;"
+                                alt="logo"></a>
+                    </div>
+                    <div class="col-md-8" style="display: flex; align-items: center;">
+                        <ul class="navbar-nav" style="width: 28%">
+                            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbardrop"
+                                    data-toggle="dropdown">DANH MỤC SẢN PHẨM</a>
+                                <div class="dropdown-menu" style="line-height: 30px;">
+                                    <a class="dropdown-item" href="{% url 'collection' %}">Tất cả sản phẩm</a>
+                                    <a class="dropdown-item"
+                                        href="{% url 'collection' %}?category=Lịch sử truyền thống">Lịch sử truyền
+                                        thống</a> <a class="dropdown-item"
+                                        href="{% url 'collection' %}?category=Kiến thức khoa học">Kiến thức khoa
+                                        học</a> <a class="dropdown-item"
+                                        href="{% url 'collection' %}?category=Văn học Việt Nam">Văn học Việt
+                                        Nam</a> <a class="dropdown-item"
+                                        href="{% url 'collection' %}?category=Văn học nước ngoài">Văn học nước
+                                        ngoài</a> <a class="dropdown-item"
+                                        href="{% url 'collection' %}?category=Truyện tranh">Truyện tranh</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="nav-search" style="width: 70%">
+                            <form action="{% url 'collection' %}" method="get"
+                                style="width: 100%; display: flex; align-items: center;">
+                                <input type="text" placeholder="Search name..." name="key" value="{{key}}">
+                                <button class="btn" type="submit">
+                                    <i class="fas fa-search"
+                                        style="color: rgba(55, 0, 255, 0.884); font-size: 20px;"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <div class="nav-cart">
+                            <a class="nav-link" href="{% url 'cart' %}" style="width: max-content; margin: auto;">
+                                <img class="cart" src="{% static 'img/cart.png' %}" alt="cart" style="width: 45px;">
+                                {% if request.session.totalQuantity  == None or request.session.totalQuantity == 0 %}
+                                <span class="count-item">0</span>
+                                {% elif request.session.totalQuantity %}
+                                <span class="count-item">{{request.session.totalQuantity }}</span>
+                                {% endif %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+
+    <!-- MAIN  -->
+    {% block content %}
+    {% endblock %}
+    <!--  -->
+
+    <!-- FOOTER -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v8.0"
+        nonce="ChmFo6ST"></script>
+
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <h5>CHÍNH HÃNG, UY TÍN, CHẤT LƯỢNG</h5>
+                    <ul>
+                        <li>
+                            <h4>BOOK STORE ONLINE</h4>
+                        </li>
+                        <li><a href="javascript:void(0);"><i class="fas fa-map-marker-alt"></i>&ensp;Address: PTIT, Hà
+                                Nội</a></li>
+                        <li><a href="javascript:void(0);"><i class="fas fa-envelope"></i>&ensp;Email:
+                                phamcuongth2000@gmail.com</a></li>
+                        <li><a href="javascript:void(0);"><i class="fas fa-phone"></i>&ensp;Mobile:
+                                0961656067</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>SẢN PHẨM</h5>
+                    <ul>
+                        <li><a href="{% url 'collection' %}?category=Lịch sử truyền thống">Lịch sử truyền
+                                thống</a></li>
+                        <li><a href="{% url 'collection' %}?category=Kiến thức khoa học">Kiến thức khoa học</a>
+                        </li>
+                        <li><a href="{% url 'collection' %}?category=Văn học Việt Nam">Văn học Việt Nam</a></li>
+                        <li><a href="{% url 'collection' %}?category=Văn học nước ngoài">Văn học nước ngoài</a>
+                        </li>
+                        <li><a href="{% url 'collection' %}?category=Truyện tranh">Truyện tranh</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <h5>KẾT NỐI VỚI CHÚNG TÔI</h5>
+                    <div class="fb-page" data-href="https://www.facebook.com/Computer-CuongPham-110156041221389"
+                        data-tabs="timeline" data-width="300" data-height="230" data-small-header="false"
+                        data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                        <blockquote cite="https://www.facebook.com/Computer-CuongPham-110156041221389"
+                            class="fb-xfbml-parse-ignore">
+                            <a href="https://www.facebook.com/Computer-CuongPham-110156041221389">Computer
+                                CuongPham</a>
+                        </blockquote>
+                    </div>
+
+                </div>
+
+                <hr>
+                <div class="footer-copyright text-center py-3" style="width: 100%;">
+                    ©
+                    <script>
+                        var now = new Date();
+                        document.write(now.getFullYear());
+                    </script>
+                    Copyright: <a href="https://www.facebook.com/cuongphamptit999/">
+                        CuongPham.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document
+                .getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/619b7c236bb0760a4943ba71/1fl3lpqvs';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+
+    <div id="toTop">
+        <img src="{% static 'img/arrow5-up-512.png' %}" id="onTop" />
+    </div>
+
+    <div id="hotline">
+        <a href="tel:0961656067" class="call-icon" rel="nofollow"> <img src="{% static 'img/icon-hotline.gif' %}"
+                id="hotline_img"></a>
+    </div>
+    <!--  -->
+</body>
+
+</html>
