@@ -261,6 +261,7 @@ def checkout(request):
             customerId=customer.id).exclude(id__in=cartIds)[0]
     shipment = Shipment.objects.get(id=int(shipmentId))
     order = Order(cart = cartCurrent,status='Đã giao hàng',shipment=shipment,customerId=customer.id)
+    
     if(paymentWith=='Cash'):
         total = cartCurrent.totalAmount+shipment.price
         cash = Cash(totalMoney= total,cashTendered=total)
