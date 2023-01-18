@@ -161,7 +161,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'computercuongpham999@gmail.com'
-EMAIL_HOST_PASSWORD = 'co 1 khong 2'
+EMAIL_HOST_PASSWORD = '************'
 
 PAYPAL_RECEIVER_EMAIL = 'sb-dm1ty6271990@business.example.com'
 
